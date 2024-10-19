@@ -14,6 +14,11 @@ inquirer.prompt([
 ])
 .then((answers) => {
     console.log(answers);
+
+    const nome = answers['p1'];
+    const gostaJapao = answers['p2'];
+
+    console.log(`Ola ${nome}, voce gosta de japao? ${gostaJapao}`);
 })
 .catch((err) => {
     console.log(err);
