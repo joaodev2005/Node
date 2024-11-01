@@ -1,0 +1,8 @@
+        LISTA DE COMPRAS (teste Node)
+
+1 arroz
+2 ervilha
+3 feijao
+4 cenoura
+5 batata
+6 ervilha
