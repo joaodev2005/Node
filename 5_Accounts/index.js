@@ -93,3 +93,31 @@ function buildAccount() {
         .catch((err) => console.log(err));
 }
 
+function deposit() {
+    inquirer
+        .prompt([
+            {
+                name: 'accountName',
+                message: 'Qual a conta deseja depositar?'
+            }
+        ])
+        .then((answer) => {
+            const accountName = answer['accountName'];
+
+            if (!checkAccount(accountName)) {
+                return deposit();
+            }
+         })
+        .catch((err) => console.log(err));
+}
+
+function checkAccount(accountName) {
+
+    if(!fs.existsSync(`accounts/${accountName}.json`)) {
+        console.log(chalk.bgRed.black('Esta conta nao existe'));
+        return false;
+    }
+
+    return true
+
+}
