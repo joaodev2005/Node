@@ -23,9 +23,29 @@ function operation() {
 
             const action = answer['action'];
 
-            if (action === 'Criar conta') {
-                createAccount();
+            switch (action) {
+                case 'Criar conta':
+                    createAccount();
+                    break;
+                case 'Depositar':
+                    deposit();
+                    break;
+                case 'Sacar':
+                    break;
+                case 'Consultar saldo':
+                    break;
+                case 'Sair':
+                    console.log(chalk.bgBlue.black('Obrigado por usar o Accounts!'));
+                    process.exit();
+                    break;
+                default:
+                    console.log('Acao invalida');
+                    break;
             }
+
+            // if (action === 'Criar conta') {
+            //     createAccount();
+            // }
 
         })
         .catch((err) => console.log(err));
@@ -72,3 +92,4 @@ function buildAccount() {
         })
         .catch((err) => console.log(err));
 }
+
