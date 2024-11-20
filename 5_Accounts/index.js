@@ -33,6 +33,7 @@ function operation() {
                 case 'Sacar':
                     break;
                 case 'Consultar saldo':
+                    getAccountBalance();
                     break;
                 case 'Sair':
                     console.log(chalk.bgBlue.black('Obrigado por usar o Accounts!'));
@@ -107,17 +108,64 @@ function deposit() {
             if (!checkAccount(accountName)) {
                 return deposit();
             }
-         })
+
+            inquirer
+                .prompt([
+                    {
+                        name: 'amount',
+                        message: 'Quanto deseja depositar?'
+                    }
+                ])
+                .then((answer) => {
+                    const amount = answer['amount'];
+
+                    addAmount(accountName, amount);
+
+                    operation();
+
+                }).catch(err => console.log(err));
+        })
         .catch((err) => console.log(err));
 }
 
 function checkAccount(accountName) {
 
-    if(!fs.existsSync(`accounts/${accountName}.json`)) {
+    if (!fs.existsSync(`accounts/${accountName}.json`)) {
         console.log(chalk.bgRed.black('Esta conta nao existe'));
         return false;
     }
 
     return true
 
+}
+
+function addAmount(accountName, amount) {
+
+    const accountData = getAccount(accountName);
+
+    if (!amount) {
+        console.log(chalk.bgRed.black('Ocorreu um erro, tente novamente mais tarde!'));
+        return deposit();
+    }
+
+    accountData.balance = parseFloat(amount) + parseFloat(accountData.balance);
+
+    fs.writeFileSync(
+        `accounts/${accountName}.json`,
+        JSON.stringify(accountData),
+        function (err) {
+            console.log(err);
+        }
+    )
+
+    console.log(chalk.green(`Foi depositado ${amount} na sua conta ${accountName}`));
+}
+
+function getAccount(accountName) {
+    const accountJSON = fs.readFileSync(`accounts/${accountName}.json`, {
+        encoding: 'utf8',
+        flag: 'r'
+    })
+
+    return JSON.parse(accountJSON);
 }
