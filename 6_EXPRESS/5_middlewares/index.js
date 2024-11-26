@@ -9,7 +9,7 @@ const basePath = path.join(__dirname, 'template');
 
 const checkAuth = (req, res, next ) => {
 
-    req.authStatus = false;
+    req.authStatus = true;
 
     if (req.authStatus) {
         console.log('Usuário autorizado!');
