@@ -1,0 +1,14 @@
+<h1>Hello World</h1>
+
+{{#if approved}}
+    <p>Usuario aprovado</p>
+{{else}}
+    <p>Usuario nao aprovado</p>
+{{/if}}
+
+<p>O usuario tem {{user.age}} anos</p>
+
+{{#if auth}}
+    <p>Usuario autenticado</p>
+    <a href="/dashboard">clique aqui</a>
+{{/if}}
