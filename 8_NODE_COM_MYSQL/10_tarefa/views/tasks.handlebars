@@ -1,0 +1,10 @@
+<h1>Tarefas</h1>
+{{#each tasks}}
+    <div class="task">
+        <h3>{{title}}</h3>
+        <a href="/tasks/edit/{{id}}">Edit</a>
+        <form action="/tasks/removetask/{{id}}" method="post">
+            <input type="submit" value="Remover">
+        </form>
+    </div>
+{{/each}}

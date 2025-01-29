@@ -1,1 +1,9 @@
-<h1>Bem vindo</h1>
+<h1>Lista de Tarefas</h1>
+
+<form action="/tasks/inserttask" method="POST" class="form">
+  <div class="form-control">
+    <label for="title">Tarefa:</label>
+    <input type="text" name="title" placeholder="Nova tarefa..." required />
+  </div>
+  <button type="submit">Add</button>
+</form>

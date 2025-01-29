@@ -19,6 +19,47 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
+app.post('/tasks/inserttask', (req, res) => {
+    const title = req.body.title;
+
+    const sql = `INSERT INTO tasks (title) VALUES ('${title}')`;
+
+    conn.query(sql, (err) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.redirect('/');
+    })
+})
+
+app.get('/tasks', (req, res) => {
+    const sql = `SELECT * FROM tasks`;
+
+    conn.query(sql, (err, data) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.render('tasks', { tasks: data });
+    })
+})
+
+app.post('/tasks/removetask/:id', (req, res) => {
+
+    const id = req.params.id;
+
+    const sql = `DELETE FROM tasks WHERE id = ${id}`;
+
+    conn.query(sql, (err) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.redirect('/tasks');
+    })
+})
+
 const conn = mysql.createConnection({
     host: 'localhost',
     user: 'root',
