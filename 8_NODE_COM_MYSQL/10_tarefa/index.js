@@ -60,6 +60,37 @@ app.post('/tasks/removetask/:id', (req, res) => {
     })
 })
 
+app.get('/tasks/edit/:id', (req, res) => {
+    
+    const id = req.params.id;
+
+    const sql = `SELECT * FROM tasks WHERE id = ${id}`;
+
+    conn.query(sql, (err, data) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        const task = data[0];
+        res.render('edittask', { task });
+    })
+})
+
+app.post('/tasks/updatetask', (req, res) => {
+    const id = req.body.id;
+    const title = req.body.title;
+
+    const sql = `UPDATE tasks SET title = '${title}' WHERE id = ${id}`;
+
+    conn.query(sql, (err) => {
+        if (err) {
+            console.log(err);
+            return;
+        }    
+        res.redirect('/tasks');
+    })
+})
+
 const conn = mysql.createConnection({
     host: 'localhost',
     user: 'root',

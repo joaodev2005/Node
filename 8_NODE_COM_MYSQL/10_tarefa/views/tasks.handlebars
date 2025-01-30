@@ -2,9 +2,31 @@
 {{#each tasks}}
     <div class="task">
         <h3>{{title}}</h3>
+        <form action="/tasks/markdone/{{id}}" method="post">
+            <input type="checkbox" name="done">
+        </form>
         <a href="/tasks/edit/{{id}}">Edit</a>
         <form action="/tasks/removetask/{{id}}" method="post">
             <input type="submit" value="Remover">
         </form>
     </div>
 {{/each}}
+
+{{!-- <h1>Tarefas</h1>
+{{#each tasks}}
+    <div class="task">
+        <h3>{{title}}</h3>
+        
+        <form action="/tasks/markdone/{{id}}" method="post">
+            <input type="submit" value="{{#if (eq done 'done')}}Marcar como Pendente{{else}}Marcar como Feita{{/if}}">
+        </form>
+
+        <span>Status: <strong>{{done}}</strong></span>
+
+        <a href="/tasks/edit/{{id}}">Editar</a>
+        
+        <form action="/tasks/removetask/{{id}}" method="post">
+            <input type="submit" value="Remover">
+        </form>
+    </div>
+{{/each}} --}}

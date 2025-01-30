@@ -1,9 +1,9 @@
 <h1>Edite a sua tarefa</h1>
-<form action="/tasks/updatask" method="post" class="form">
-    <input type="hidden" name="id" value="{{tasks.id}}">
+<form action="/tasks/updatetask" method="post" class="form">
+    <input type="hidden" name="id" value="{{task.id}}">
     <div class="form-control">
         <label for="title">Titulo:</label>
-        <input type="text" name="title" id="title" placeholder="Digite o titulo" value="{{tasks.title}}">
+        <input type="text" name="title" id="title" placeholder="Digite o titulo" value="{{task.title}}">
     </div>
     <input type="submit" value="editar">
 </form>
