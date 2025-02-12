@@ -122,7 +122,9 @@ app.get('/', async (req, res) => {
     res.render('home', { users });
 });
 
-conn.sync().then(() => {
+conn.sync()
+// conn.sync({ force: true })
+.then(() => {
     app.listen(3000, () => {
         console.log('Servidor rodando na porta 3000');
     })
