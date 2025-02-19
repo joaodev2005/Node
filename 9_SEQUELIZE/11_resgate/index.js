@@ -71,28 +71,20 @@ app.post('/users/delete/:id', async (req, res) => {
 
 })
 
-app.get('/users/edit/:id', async (req, res) => {
-
-    const id = req.params.id;
-
-    try {
-        // const user = await User.findOne({
-        //     include: Address,
-        //     where: {
-        //         id: id
-        //     }
-        // });
-
-        const user = await User.findOne({
-            include: { model: Address, as: 'Addresses' },
-            where: { id: id }
-        });
-
-        res.render('useredit', { user: user.get({ plain: true }) });
-    } catch (err) {
-        console.log(err);
-    }
-})
+app.get('/users/edit/:id', function (req, res) {
+    const id = req.params.id
+  
+    User.findOne({
+      include: Address,
+      where: {
+        id: id,
+      },
+    })
+      .then((user) => {
+        res.render('useredit', { user: user.get({ plain: true }) })
+      })
+      .catch((err) => console.log(err))
+  })
 
 app.post('/users/update', async (req, res) => {
 
