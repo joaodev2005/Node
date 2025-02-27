@@ -1,0 +1,110 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#navbar {
+    border-bottom: 1px solid #ccc;
+    padding: 1em 2em;
+    margin-bottom: 20px;
+    background-color: #db4c3f;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+#navbar ul li {
+    margin-right: 2em;
+
+}
+
+#navbar ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+.form, 
+.tasks-container {
+    width: 450px;
+    margin: 0 auto;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form-control {
+    display: flex;
+    flex-direction: column;
+    margin: 1em 0;
+}
+
+.form-control label {
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
+.form-control input {
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+.form button {
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 3em;
+    cursor: pointer;
+}
+
+.form-checkbox {
+    flex-direction: row;
+}
+
+.form-checkbox input,
+.form-control textarea {
+    padding: 7px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+
+    border: 1px solid #ccc;
+}
+
+.container {
+    max-width: 450px;
+    margin: 2em auto;
+}
+
+.form-control textarea {
+    resize: none;
+}
+
+.form-control input[type="submit"] {
+    background: #db4c3f;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 3em;
+    cursor: pointer;
+}
