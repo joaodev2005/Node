@@ -2,11 +2,16 @@
 <ul class="task-list">
     {{#each tasks}}
         <li>
-            <a href="/tasks/{{id}}" class="title">{{this.title}}</a>
+            <a href="/" class="title">{{this.title}}</a>
             <div class="actions">
-                <a href="/"><i class="bi bi-check2"></i></a>
-                <a href="/tasks/{{id}}/edit" class="edit"></a>
-                <a href="/tasks/{{id}}/edit" class="edit"></a>
+                <a href="/" class="">check</a>
+                <a href="/" class="">edit</a>
+                <form action="/tasks/remove" method="post">
+                    <input type="hidden" name="id" value="{{this.id}}">
+                    <button type="submit">
+                        🗑️
+                    </button>
+                </form>
             </div>
         </li>
     {{/each}}

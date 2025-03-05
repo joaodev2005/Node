@@ -108,3 +108,62 @@ h1 {
     padding: 10px 3em;
     cursor: pointer;
 }
+
+.task-list {
+    list-style: none;
+    margin-top: 1em;
+}
+
+.task-list li {
+    border: 1px solid #ccc;
+    padding: 1em;
+    margin: 1em 0;
+    border-radius: 3px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.task-list .title {
+    font-weight: bold;
+    font-size: 1.2em;
+    transition: .5s;
+    -webkit-transition: .5s;
+    -moz-transition: .5s;
+    -ms-transition: .5s;
+    -o-transition: .5s;
+    color: #000;
+}
+
+.task-list .title:hover {
+    color: #db4c3f;
+}
+
+.actions a {
+    text-decoration: none;
+    color: #000;
+    margin: 0 .5em;
+    cursor: pointer;
+}
+
+.actions form {
+    margin: 0;
+}
+
+.actions button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.actions {
+    display: flex;
+    align-items: center; 
+    gap: 0.5em; 
+}
+
+.actions a,
+.actions button {
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+}
