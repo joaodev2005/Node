@@ -2,9 +2,20 @@
 <ul class="task-list">
     {{#each tasks}}
         <li>
-            <a href="/" class="title">{{this.title}}</a>
+           {{#if this.done}}
+                <span class="done">✅</span>
+            {{else}}
+                <span class="pending">❌</span>
+            {{/if}}
+            {{this.title}}
             <div class="actions">
-                <a href="/" class="">check</a>
+                <form action="/tasks/updateStatus" method="post">
+                    <input type="hidden" name="id" value="{{this.id}}">
+                    <input type="hidden" name="done" value="{{this.done}}">
+                    <button type="submit">
+                        check
+                    </button>
+                </form>
                 <a href="/tasks/edit/{{this.id}}" class="">edit</a>
                 <form action="/tasks/remove" method="post">
                     <input type="hidden" name="id" value="{{this.id}}">
