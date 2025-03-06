@@ -5,7 +5,7 @@
             <a href="/" class="title">{{this.title}}</a>
             <div class="actions">
                 <a href="/" class="">check</a>
-                <a href="/" class="">edit</a>
+                <a href="/tasks/edit/{{this.id}}" class="">edit</a>
                 <form action="/tasks/remove" method="post">
                     <input type="hidden" name="id" value="{{this.id}}">
                     <button type="submit">

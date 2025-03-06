@@ -28,6 +28,15 @@ module.exports = class TaskController {
         res.redirect('/tasks');
     }
 
+    static async updateTask(req, res) {
+
+        const id = req.params.id;
+
+        const task = await Task.findOne({ where: { id: id }, raw: true });
+
+        res.render('tasks/edit', { task });
+    }
+
     static async showTasks(req, res) {
 
         const tasks = await Task.findAll({ raw: true });
