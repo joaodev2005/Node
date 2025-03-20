@@ -72,7 +72,8 @@ app.use('/', authRoutes);
 
 app.get('/', ToughtsController.showToughts);
 
-conn.sync().then(() => {
+conn.sync()
+.then(() => {
     app.listen(3000, () => {
         console.log('Servidor rodando na porta 3000');
     })
