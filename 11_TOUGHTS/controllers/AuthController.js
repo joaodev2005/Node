@@ -53,6 +53,6 @@ module.exports = class AuthController {
         } catch (error) {
             console.log(error);
         }
-
     }
 }
+    
