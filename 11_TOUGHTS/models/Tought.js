@@ -9,7 +9,12 @@ const Tought = db.define('Tought', {
         type: DataTypes.STRING,
         allowNull: false,
         required: true
-    }
+    },
+    UserId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        required: true
+    },
 });
 
 Tought.belongsTo(User)
