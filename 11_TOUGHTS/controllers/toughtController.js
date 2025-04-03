@@ -50,8 +50,14 @@ module.exports = class ToughtController {
             }
     
             const toughts = user.Toughts.map((t) => t.dataValues); 
+
+            let emptyToughts = false;
+
+            if (toughts.length === 0) { 
+                emptyToughts = true;
+            }
     
-            res.render("toughts/dashboard", { toughts });
+            res.render("toughts/dashboard", { toughts, emptyToughts });
         } catch (error) {
             console.error("Erro ao carregar o dashboard:", error);
             req.flash("message", "Erro ao carregar seus pensamentos.");
