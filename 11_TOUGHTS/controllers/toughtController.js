@@ -7,7 +7,7 @@ module.exports = class ToughtController {
     }
 
     // static async dashboard(req, res) {
-        
+
     //     const userId = req.session.userid;
 
     //     const user = await User.findOne({
@@ -29,34 +29,34 @@ module.exports = class ToughtController {
 
     static async dashboard(req, res) {
         console.log("Sessão UserID:", req.session.userid);
-    
+
         if (!req.session.userid) {
             req.flash("message", "Você precisa estar logado para acessar o dashboard!");
             return res.redirect("/login");
         }
-    
+
         try {
             const userId = req.session.userid;
-            
+
             const user = await User.findOne({
                 where: { id: userId },
-                include: Tought, 
-                order: [["createdAt", "DESC"]], 
+                include: Tought,
+                order: [["createdAt", "DESC"]],
             });
-    
+
             if (!user) {
                 req.flash("message", "Usuário não encontrado!");
                 return res.redirect("/login");
             }
-    
-            const toughts = user.Toughts.map((t) => t.dataValues); 
+
+            const toughts = user.Toughts.map((t) => t.dataValues);
 
             let emptyToughts = false;
 
-            if (toughts.length === 0) { 
+            if (toughts.length === 0) {
                 emptyToughts = true;
             }
-    
+
             res.render("toughts/dashboard", { toughts, emptyToughts });
         } catch (error) {
             console.error("Erro ao carregar o dashboard:", error);
@@ -64,7 +64,7 @@ module.exports = class ToughtController {
             res.redirect("/");
         }
     }
-    
+
 
     static createTought(req, res) {
         res.render('toughts/create');
@@ -92,23 +92,23 @@ module.exports = class ToughtController {
     //     }
     // }
     static async createToughtSave(req, res) {
-        console.log("Sessão UserID:", req.session.userid); 
-    
+        console.log("Sessão UserID:", req.session.userid);
+
         if (!req.session.userid) {
             req.flash("message", "Você precisa estar logado para criar um pensamento!");
             return res.redirect("/login");
         }
-    
+
         if (!req.body.title || req.body.title.trim() === "") {
             req.flash("message", "O pensamento não pode estar vazio!");
             return res.redirect("/toughts/dashboard");
         }
-    
+
         const tought = {
             title: req.body.title.trim(),
-            UserId: req.session.userid, 
+            UserId: req.session.userid,
         };
-    
+
         try {
             await Tought.create(tought);
             req.flash("message", "Pensamento criado com sucesso!");
@@ -127,20 +127,70 @@ module.exports = class ToughtController {
         const id = req.body.id;
         const UserId = req.session.userid;
 
-       
+
 
         try {
             await Tought.destroy({ where: { id: id, UserId: UserId } });
 
             req.flash('message', 'Pensamento removido com sucesso!');
 
-            req.session.save(() => {    
+            req.session.save(() => {
                 res.redirect('/toughts/dashboard');
             });
         } catch (error) {
             console.log(error);
         }
     }
+
+    // static async updateTought(req, res) {
+
+    //     const id = req.params.id;
+
+    //     const tought = Tought.findOne({ where: { id: id }, raw: true });
+
+    //     res.render('toughts/edit', { tought });
+    // }
+
+    static async updateTought(req, res) {
+        try {
+            const id = req.params.id;
     
+            const tought = await Tought.findOne({ where: { id: id } });
+    
+            if (!tought) {
+                req.flash("message", "Pensamento não encontrado!");
+                return res.redirect("/toughts/dashboard");
+            }
+    
+            res.render("toughts/edit", { tought: tought.dataValues });
+        } catch (error) {
+            console.error("Erro ao carregar a edição:", error);
+            req.flash("message", "Erro ao carregar o pensamento para edição.");
+            res.redirect("/toughts/dashboard");
+        }
+    }
+
+    static async updateToughtSave(req, res) {
+        const id = req.body.id; 
+    
+        const tought = {
+            title: req.body.title,
+        };
+    
+        try {
+            await Tought.update(tought, { where: { id: id } });
+    
+            req.flash("message", "Pensamento atualizado com sucesso!");
+    
+            req.session.save(() => {
+                res.redirect("/toughts/dashboard");
+            });
+        } catch (error) {
+            console.error("Erro ao atualizar o pensamento:", error);
+            req.flash("message", "Erro ao atualizar o pensamento.");
+            res.redirect("/toughts/dashboard");
+        }
+    }
+
 }
 
