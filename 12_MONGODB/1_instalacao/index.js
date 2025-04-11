@@ -5,6 +5,8 @@ const app = express();
 
 const conn = require('./db/conn.js');
 
+const productRoutes = require('./routes/productRoutes.js');
+
 app.engine('handlebars', exphbs.engine());
 app.set('view engine', 'handlebars');
 
@@ -15,6 +17,8 @@ app.use(
 app.use(express.json());
 
 app.use(express.static('public'));
+
+app.use('/products', productRoutes);
 
 app.listen(3000, () => {
     console.log('Servidor rodando na porta 3000!')
