@@ -39,6 +39,13 @@ class Product  {
         await conn.db().collection('products').deleteOne({ _id: new ObjectId(id) });
 
     }
+
+    updateProduct(id) {
+
+        conn.db().collection('products').updateOne({ _id: new ObjectId(id) }, {$set: this });
+
+        return
+    }
 }
 
 module.exports = Product;
